@@ -2,20 +2,41 @@
 - name: Provision CICS Data sets and start the region
   hosts: all
   gather_facts: false
-  vars_files: "{{ playbook_dir }}/host_vars/variables.yml"
-  environment: "{{ environment_vars }}"
+  environment: "{{ z_environment_vars }}"
 
   vars:
-    applid: APPLID
+    ds_base: "{{ ansible_user }}.RGNS.{{ applid }}"
 
   module_defaults:
     group/ibm.ibm_zos_cics.region:
       state: initial
       cics_data_sets:
-        template: "CTS610.CICS740.<< lib_name >>"
-        sdfhlic: "CTS610.CICS740.LIC.SDFHLIC"
+        template: "ANTZ.CICS.TS.DEV.INTEGRAT.<< lib_name >>"
+        sdfhlic: "ANTZ.CICS.TS.L750.GM01.SDFHLIC"
       region_data_sets:
-        template: "{{ ansible_user }}.REGIONS.{{ applid }}.<< data_set_name >>"
+        dfhtemp:
+          dsn: "{{ ds_base }}.DFHTEMP"
+        dfhauxt:
+          dsn: "{{ ds_base }}.DFHAUXT"
+        dfhbuxt:
+          dsn: "{{ ds_base }}.DFHBUXT"
+        dfhcsd:
+          dsn: "{{ ds_base }}.DFHCSD"
+        dfhgcd:
+          dsn: "{{ ds_base }}.DFHGCD"
+        dfhlcd:
+          dsn: "{{ ds_base }}.DFHLCD"
+        dfhlrq:
+          dsn: "{{ ds_base }}.DFHLRQ"
+        dfhintra:
+          dsn: "{{ ds_base }}.DFHINTRA"
+        dfhdmpa:
+          dsn: "{{ ds_base }}.DFHDMPA"
+        dfhdmpb:
+          dsn: "{{ ds_base }}.DFHDMPB"
+        dfhstart:
+          dsn: "{{ ds_base }}.DFHSTART"
+
       le_data_sets:
         template: "CEE.<< lib_name >>"
 
@@ -73,11 +94,11 @@
           gmtext: Region provisioned with Ansible
           srbsvc: 218
           tcpip: "NO"
-          usshome: /cics/cics740
+          usshome: /itbld/cics.ts.dev/Integrat/dist
           sysidnt: ZPY1
       register: result
 
     - name: Submit region JCL
       ansible.builtin.command:
-        cmd: jsub "{{ ansible_user }}.REGIONS.{{ applid }}.DFHSTART"
+        cmd: jsub "{{ ansible_user }}.RGNS.{{ applid }}.DFHSTART"
       changed_when: true
