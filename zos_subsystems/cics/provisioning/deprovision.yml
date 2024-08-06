@@ -19,6 +19,7 @@
     - name: Stop CICS Region
       ibm.ibm_zos_cics.stop_region:
         job_name: "{{ applid }}"
+        mode: immediate
       register: result
       failed_when: false
 
