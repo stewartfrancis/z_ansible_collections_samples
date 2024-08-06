@@ -2,7 +2,7 @@
 - name: Provision CICS Data sets and start the region
   hosts: all
   gather_facts: false
-  
+
   environment: "{{ environment_vars }}"
 
   module_defaults:
@@ -76,5 +76,5 @@
 
     - name: Submit region JCL
       ansible.builtin.command:
-        cmd: jsub "{{ ansible_user }}.REGIONS.{{ applid }}.DFHSTART"
+        cmd: jsub "{{ ansible_user }}.RGNS.{{ applid }}.DFHSTART"
       changed_when: true
