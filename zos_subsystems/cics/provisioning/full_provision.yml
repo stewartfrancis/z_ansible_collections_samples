@@ -2,11 +2,8 @@
 - name: Provision CICS Data sets and start the region
   hosts: all
   gather_facts: false
-  vars_files: "{{ playbook_dir }}/host_vars/variables.yml"
+  
   environment: "{{ environment_vars }}"
-
-  vars:
-    applid: APPLID
 
   module_defaults:
     group/ibm.ibm_zos_cics.region:
@@ -15,7 +12,7 @@
         template: "CTS610.CICS740.<< lib_name >>"
         sdfhlic: "CTS610.CICS740.LIC.SDFHLIC"
       region_data_sets:
-        template: "{{ ansible_user }}.REGIONS.{{ applid }}.<< data_set_name >>"
+        template: "{{ ansible_user }}.RGNS.{{ applid }}.<< data_set_name >>"
       le_data_sets:
         template: "CEE.<< lib_name >>"
 
