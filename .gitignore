@@ -155,8 +155,6 @@ cython_debug/
 # Archives
 *.zip
 *.tar
-*.tar.gz
-*.gz
 
 # Media
 *.mp4
