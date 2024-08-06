@@ -1,0 +1,76 @@
+---
+# (c) Copyright IBM Corp. 2020,2024
+
+# IBM collection namespace
+namespace: ibm
+
+# Red Hat Ansible Certified Content for IBM Z
+name: ibm_zos_cics
+
+# The collection version
+version: 2.1.0
+
+# Collection README file
+readme: README.md
+
+# Contributors
+authors:
+  - Stewart Francis
+  - Tom Latham
+  - Sophie Green
+  - Ya Qing Chen
+  - Andrew Twydell
+# Description
+description:
+  The Red Hat Ansible Certified Content for IBM Z CICS collection includes connection plugins, action plugins,
+  modules and sample playbooks to automate tasks for CICS
+
+# License
+license: [Apache-2.0]
+# Tags
+tags: [ibm, z, zos, z_os, cics, cmci, infrastructure]
+
+# Collections that this collection requires to be installed for it to be usable.
+# dependencies: {} # This collection depends on no other collections
+
+# The URL of the originating SCM repository
+repository: https://github.com/ansible-collections/ibm_zos_cics
+
+# The URL to any online docs
+documentation: https://ibm.github.io/z_ansible_collections_doc
+
+# The URL to the homepage of the collection/project
+homepage: https://www.ibm.com/support/z-content-solutions/ansible/
+
+# The URL to the collection issue tracker
+issues: https://github.com/ansible-collections/ibm_zos_cics/issues
+
+# Ignore files and directories matching the following patterns
+build_ignore:
+  - Dockerfile
+  - yamllint.yaml
+  - venv2
+  - venv3
+  - .pytest_cache
+  - .idea
+  - .gitignore
+  - .ansible-test
+  - tests/integration
+  - tests/unit
+  - tests/output
+  - tests/__init__.py
+  - docs
+  - CONTRIBUTING.md
+  - build.sh
+  - dev-requirements.txt
+  - doc-requirements.txt
+  - .travis
+  - .github
+  - .ansible-lint
+  - .travis.yml
+  - .whitesource
+  - ibm-ibm_zos_cics-*.tar.gz
+  - changelogs
+  - .devcontainer
+  - .vscode
+  - .secrets.baseline
