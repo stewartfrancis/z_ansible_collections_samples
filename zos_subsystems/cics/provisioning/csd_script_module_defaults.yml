@@ -1,0 +1,27 @@
+---
+- name: "Run a script against a CSD"
+  
+  gather_facts: false
+  hosts: all
+  environment: "{{ environment_vars }}"
+
+  module_defaults:
+    group/ibm.ibm_zos_cics.region:
+      cics_data_sets:
+        sdfhload: CTS610.CICS740.SDFHLOAD
+      region_data_sets:
+        dfhcsd: STEWF.RGNS.CSD.DFHCSD2
+
+  tasks:
+    - name: "Allocate and initialize a CSD"
+      ibm.ibm_zos_cics.csd:
+        state: initial
+      
+    - name: Create a group list for my region, and add the auto install terminal definitions to it
+      ibm.ibm_zos_cics.csd:
+        state: changed
+        input_location: INLINE
+        input_content: |
+          ADD GROUP(DFHTERMC) LIST(DFHLIST1)
+
+          LIST LIST(DFHLIST1) OBJECTS

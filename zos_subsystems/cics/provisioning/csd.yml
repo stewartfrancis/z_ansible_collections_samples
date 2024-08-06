@@ -1,0 +1,16 @@
+---
+- name: Allocate and initialize a new CSD
+
+  hosts: all
+  gather_facts: false
+  environment: "{{ environment_vars }}"
+
+  tasks:
+    - name: Allocate and initialize a new CSD
+      ibm.ibm_zos_cics.csd:
+        cics_data_sets:
+          sdfhload: CTS610.CICS740.SDFHLOAD
+        region_data_sets:
+          dfhcsd:
+            dsn: STEWF.RGNS.CSD.DFHCSD
+        state: absent

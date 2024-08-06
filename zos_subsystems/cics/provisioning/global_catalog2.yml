@@ -1,0 +1,16 @@
+---
+- name: Provision a local catalog
+
+  hosts: all
+  gather_facts: false
+  environment: "{{ environment_vars }}"
+
+  tasks:
+    - name: Provision a local catalog
+      ibm.ibm_zos_cics.global_catalog:
+        cics_data_sets:
+          sdfhload: CTS610.CICS740.SDFHLOAD
+        region_data_sets:
+          dfhgcd:
+            dsn: STEWF.RGNS.GCD.DFHGCD2
+        state: cold

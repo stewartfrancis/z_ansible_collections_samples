@@ -1,0 +1,33 @@
+---
+- name: "Use a template to describe the region data set naming conventions"
+  
+  gather_facts: false
+  hosts: all
+  environment: "{{ environment_vars }}"
+
+  tasks:
+    - name: "Generate CICS region JCL"
+      ibm.ibm_zos_cics.region_jcl:
+        state: initial
+        applid: IYK2ZOES
+        cics_data_sets:
+          template: "CTS610.CICS740.<< lib_name>>"
+          sdfhlic: "CTS610.CICS740.LIC.SDFHLIC"
+        le_data_sets:
+          template: "CEE.<< lib_name >>"
+        region_data_sets:
+          template: "STEWF.RGNS.STARTC.<< data_set_name >>"
+        job_parameters:
+          region: 0M
+        sit_parameters:
+          start: INITIAL
+          sit: 6$
+          aicons: AUTO
+          cicssvc: 217
+          edsalim: 500M
+          grplist: (DFHLIST*)
+          gmtext: Region provisioned with Ansible
+          srbsvc: 218
+          tcpip: "NO"
+          usshome: /cics/cics740
+          sysidnt: ZPY1
